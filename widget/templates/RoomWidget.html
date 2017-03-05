@@ -1,0 +1,65 @@
+<div data-dojo-attach-point="containerNode" >
+	
+	<div data-dojo-attach-point="main" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="gutters:true" style="height: 555px; width: 840px; padding: 0px; ">
+	
+		<div data-dojo-attach-point="leftPanel" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'left'"
+			 style="width: 160px; color: white; background-color: black;  font-size: 11px; position relative; z-index: 50"> 
+			
+			<div style="height: 50px">  </div>
+			
+			<strong data-dojo-attach-point="titleLabel" style="line-height: 18px"> </strong>
+			<div data-dojo-attach-point="popLabel" style="line-height: 18px">  </div>
+			<div data-dojo-attach-point="stateLabel" style="line-height: 18px"></div>
+			
+			<div style="height: 35px">  </div>
+			 
+			<strong>Description: </strong>
+			<div data-dojo-attach-point="descriptionLabel" style="height: 70px"> </div>
+				
+			<div style="background-color: rgb(32,38,46); height: 20px; line-height: 20px; margin-bottom: 5px; ">
+				&nbsp
+				<strong style="float:left; margin-left : 10px"> Player </strong>
+				<strong style="float:right; margin-right : 10px"> Rating </strong>
+			</div>
+		</div>
+		
+		<div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="gutters:true, region:'center'" >
+		
+				<div data-dojo-attach-point="toolbar" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top', baseClass:'dijitContentPaneNoPadding'" style="background-color: black; color:white; height:30px; overflow: hidden; position:relative; padding-top: 3px">
+					<div data-dojo-attach-point="settsButton" style="display: inline-block; line-height: 24px; height: 24px; width:80px; position: relative">
+						<img src="/widget/images/room/setts.png" style="position:absolute"></img>
+						<span style="position:absolute; left:25px">Settings</span>			 
+					</div>
+					<div data-dojo-attach-point="readyCheckBox" style="display: inline-block; line-height: 24px; height: 24px; width:60px; position: relative">
+						<img data-dojo-attach-point="readyCheckBoxImg" src="/widget/images/room/unchecked.png" style="position:absolute; top: 5px; left: 5px"></img>
+						<span style="position:absolute; left:23px">Ready</span>			 
+					</div>
+					<div data-dojo-attach-point="startButton" style="display: inline-block; line-height: 24px; height: 24px; width:90px; position: relative">
+						<img src="/widget/images/room/start.png" style="position:absolute"></img>
+						<span style="position:absolute; left:25px">Start Game</span>			 
+					</div>
+				</div>
+				
+				<div data-dojo-attach-point="rightPanel" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'right',
+							baseClass:'dijitContentPaneNoPadding'" style="width: 240px; background-color:black; text-align:center">
+							
+						<div style="height:35px"></div>
+						
+						<div data-dojo-attach-point="scoreWidgetContainer"></div>
+						
+						<div style="height:35px"></div>
+				</div>
+				
+				<div data-dojo-attach-point="boardContainer" data-dojo-type="dijit/layout/ContentPane" 
+				data-dojo-props="region:'center', baseClass:'dijitContentPaneNoPadding'"></div>
+				
+				<div data-dojo-attach-point="chatContainer" data-dojo-type="dijit/layout/ContentPane" 
+				data-dojo-props="gutters:false, region:'bottom', baseClass:'dijitContentPaneNoPadding'" style="height: 100px;  background-color:#b3b6bb; overflow: visible">
+					
+				</div>
+		</div>
+		
+	</div>
+	
+</div>
+

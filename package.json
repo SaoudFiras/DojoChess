@@ -1,0 +1,15 @@
+{
+     "name": "dojo_chess",
+     "description": "dojo chess",
+     "version": "0.0.1",
+     "dependencies": {
+        "express": "latest",
+        "socket.io": "latest"
+     },
+     "scripts": {
+      "start": "node server.js"
+    },
+     "engines": {
+       "node": "6.9.5"
+     }
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Dojo Chess</title>
+
+		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/dojo/1.9.2/dijit/themes/claro/claro.css" media="screen">
+		<style type="text/css">
+
+			@font-face {
+				font-family:"chessAlpha";
+				src: url("/resources/ChessAlpha2.ttf")
+			}
+
+			html, body {
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				padding: 0;
+				overflow:hidden;
+			}
+
+			.nonModal_underlay {
+				display:none
+			}
+
+		</style>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/dojo/1.9.2/dojo/dojo.js" ></script>
+
+        <script>
+
+            require(["/widget/LobbyWidget.js", "dojo/_base/window", "dojo/dom", "dojo/parser", "dojo/domReady!"],
+                    function(LobbyWidget, win, dom, parser) {
+
+          						var socket = io.connect(location.origin, {reconnect: false});
+
+          						var username = "Guest" + Math.floor((Math.random()*1000)+1);
+          						var user = {"name": username, "country" : "Unknown", "state":"looking",
+          									     "rating":1600,  "wins" : 0, "losses" : 0, "draws" : 0, "room" : -1};
+
+                      var lobby = new LobbyWidget({"socket":socket, "user": user});
+                      lobby.placeAt(win.body());
+                      lobby.startup();
+          					  parser.parse();
+
+                    });
+        </script>
+
+    </head>
+
+    <body class="claro" style="font-family: Tahoma; font-size:11.5px;">
+
+    </body>
+</html>
