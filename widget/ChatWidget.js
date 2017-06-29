@@ -56,6 +56,7 @@ define(["dojo/_base/declare",
 					self.smileyLiteralToImg[domAttr.get(smileyNode, "alt")] = domAttr.get(smileyNode, "src");
 					self.own(on(smileyNode, "click", function(){
 									self.chatField.value += " " + domAttr.get(smileyNode, "alt");
+									self.chatField.focus();
 								}))
 				});
 
