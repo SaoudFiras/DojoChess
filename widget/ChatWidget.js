@@ -7,10 +7,11 @@ define(["dojo/_base/declare",
 		"dojo/dom-construct",
 		"dojo/dom-geometry",
 		"dojo/dom-attr",
+		"dojo/regexp",
 		"dojo/_base/window",
 		"/widget/SmileyWidget.js"],
     function(declare, on, _WidgetBase, _TemplatedMixin,
-	template, domStyle, domCons, domGeom, domAttr, win, SmileyWidget){
+	template, domStyle, domCons, domGeom, domAttr, regexp, win, SmileyWidget){
 
         return declare("ChatWidget",[_WidgetBase, _TemplatedMixin], {
 
@@ -86,9 +87,16 @@ define(["dojo/_base/declare",
 
 			insertChat: function(msg, colorString){
 
+				// Append a harmless white space so the test below finds smilies at the end of the message
+				msg += " ";
+
 				for (var smiley in this.smileyLiteralToImg) {
-					if(msg.indexOf(smiley) !== -1){
-						msg = msg.replace(new RegExp(smiley, 'g'), "<img alt='" + smiley + "' src='" + this.smileyLiteralToImg[smiley] + "'/>");
+
+					if(msg.indexOf(smiley + " ") !== -1){
+
+						var smileyTag = "<img alt='" + smiley + "' src='" + this.smileyLiteralToImg[smiley] + "'/> ";
+						msg = msg.replace(new RegExp(regexp.escapeString(smiley) + " ","g"), smileyTag);
+
 					}
 				}
 
