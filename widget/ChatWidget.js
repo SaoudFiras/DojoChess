@@ -8,10 +8,11 @@ define(["dojo/_base/declare",
 		"dojo/dom-geometry",
 		"dojo/dom-attr",
 		"dojo/regexp",
+		"dojox/html/entities",
 		"dojo/_base/window",
 		"/widget/SmileyWidget.js"],
     function(declare, on, _WidgetBase, _TemplatedMixin,
-	template, domStyle, domCons, domGeom, domAttr, regexp, win, SmileyWidget){
+	template, domStyle, domCons, domGeom, domAttr, regexp, html, win, SmileyWidget){
 
         return declare("ChatWidget",[_WidgetBase, _TemplatedMixin], {
 
@@ -101,9 +102,9 @@ define(["dojo/_base/declare",
 					}
 				}
 
-				if(colorString == "black"){
+				if(colorString === "black"){
 					var username = msg.substring(0, msg.indexOf("&gt")+3)
-					var rest = msg.substring(msg.indexOf("&gt")+3)
+					var rest = html.encode(msg.substring(msg.indexOf("&gt")+3))
 					domCons.create("strong", { innerHTML: username, style:{color: colorString}}, this.chatArea)
 					domCons.create("span", { innerHTML: rest, style:{color: colorString}}, this.chatArea)
 				}
