@@ -91,6 +91,7 @@ define(["dojo/_base/declare",
 
 				// Append a harmless white space so the test below finds smilies at the end of the message
 				msg += " ";
+				msg = html.encode(msg);
 
 				for (var smiley in this.smileyLiteralToImg) {
 
@@ -103,8 +104,10 @@ define(["dojo/_base/declare",
 				}
 
 				if(colorString === "black"){
-					var username = msg.substring(0, msg.indexOf("&gt")+3)
-					var rest = html.encode(msg.substring(msg.indexOf("&gt")+3))
+					var username = msg.substring(0, msg.indexOf("&gt;")+4)
+					console.log("username", username)
+					// var rest = html.encode(msg.substring(msg.indexOf("&gt")+3))
+					var rest = msg.substring(msg.indexOf("&gt;")+4);
 					domCons.create("strong", { innerHTML: username, style:{color: colorString}}, this.chatArea)
 					domCons.create("span", { innerHTML: rest, style:{color: colorString}}, this.chatArea)
 				}

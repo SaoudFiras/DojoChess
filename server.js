@@ -42,6 +42,8 @@ io.sockets.on('connection', function (socket) {
 
 		var user = socket.user
 
+    if(!user) return;
+
 		console.log("disconnect " + JSON.stringify(user))
 
 		users = users.filter(function(u){
@@ -71,7 +73,7 @@ io.sockets.on('connection', function (socket) {
 	})
 
 	socket.on('lobby chat', function(msg){
-		io.sockets.emit('lobby chat', "&lt" + socket.user.name + "&gt " +  msg)
+		io.sockets.emit('lobby chat', "<" + socket.user.name + "> " +  msg)
 	})
 
 	socket.on('room join', function(roomId){
@@ -119,7 +121,7 @@ io.sockets.on('connection', function (socket) {
 	})
 
 	socket.on('room chat', function(msg){
-		io.sockets.in(socket.user.room).emit('room chat', "&lt" + socket.user.name + "&gt " +  msg)
+		io.sockets.in(socket.user.room).emit('room chat', "<" + socket.user.name + "> " +  msg)
 	})
 
 	socket.on('move', function(move){
@@ -134,10 +136,10 @@ io.sockets.on('connection', function (socket) {
 		var dstSocket = userNameToSocket[toUsername]
 
 		if(dstSocket){
-			dstSocket.emit('private chat', socket.user.name, "&lt" + socket.user.name + "&gt " +  msg )
+			dstSocket.emit('private chat', socket.user.name, "<" + socket.user.name + "> " +  msg )
 		}
 		else{
-			socket.emit('private chat', toUsername, "&lt" + toUsername + "&gt " +  "Sorry I'm a bot, I can't talk much :(" )
+			socket.emit('private chat', toUsername, "<" + toUsername + "> " +  "Sorry I'm a bot, I can't talk much :(" )
 		}
 
 	})
@@ -153,7 +155,7 @@ io.sockets.on('connection', function (socket) {
 
 		var game = games[socket.user.room]
 		game.state = "waiting"
-		io.sockets.in(socket.user.room + "").emit("room chat", "&lt" + winningColor + " wins&gt")
+		io.sockets.in(socket.user.room + "").emit("room chat", "<" + winningColor + " wins>")
 		io.sockets.emit('game attributes', socket.user.room, {state : game.state})
 	})
 
@@ -197,12 +199,12 @@ var playGame = function(filePath, roomId){
 				var winner = moves.length % 2 === 0 ? black : white
 				var looser = moves.length % 2 === 0 ? white : black
 
-				events.push({"name":"room chat", "data": "&lt" + (winner === white ? "White" : "Black") + " wins&gt"})
-				events.push({"name":"room chat", "data": "&lt" + looser + "&gt " +  "well played :thumbsup:"})
-				events.push({"name":"room chat", "data": "&lt" + winner + "&gt " +  "thanks :flowers:"})
-				events.push({"name":"room chat", "data": "&lt" + looser + "&gt " +  ((Math.floor(Math.random() * 2) + 1) == 1? "rematch?" : "one more?")})
-				events.push({"name":"room chat", "data": "&lt" + winner + "&gt " +  "sure"})
-				events.push({"name":"room chat", "data": "&lt" + winner + "&gt " +  "let's go"})
+				events.push({"name":"room chat", "data": "<" + (winner === white ? "White" : "Black") + " wins>"})
+				events.push({"name":"room chat", "data": "<" + looser + "> " +  "well played :thumbsup:"})
+				events.push({"name":"room chat", "data": "<" + winner + "> " +  "thanks :flowers:"})
+				events.push({"name":"room chat", "data": "<" + looser + "> " +  ((Math.floor(Math.random() * 2) + 1) == 1? "rematch?" : "one more?")})
+				events.push({"name":"room chat", "data": "<" + winner + "> " +  "sure"})
+				events.push({"name":"room chat", "data": "<" + winner + "> " +  "let's go"})
 
 				emitNextEvent(roomId, 0, events)
 
@@ -231,7 +233,7 @@ var emitNextEvent = function(roomId, eventIndex, events){
 	eventIndex++
 
 	var delay = Math.random() * (5000 - 1000) + 1000
-
+  
 	if(eventIndex == events.length - 6){
 		// if it was the last move, aknowledge fast that the game is over
 		delay = 100
